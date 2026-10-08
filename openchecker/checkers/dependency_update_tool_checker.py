@@ -174,7 +174,8 @@ def dependency_update_tool_checker(project_url: str, res_payload: dict) -> None:
     指标详情介绍 https://github.com/ossf/scorecard/blob/main/docs/checks.md#dependency-update-tool
     """
     
-    owner_name, repo_path = platform_manager.parse_project_url(project_url)
+    owner_name, repo_name = platform_manager.parse_project_url(project_url)
+    repo_path = os.path.join(os.getcwd(), repo_name)
     dependency_tools = _check_dependency_files(repo_path)
     
     res_payload["scan_results"][COMMAND] = dependency_tools

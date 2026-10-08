@@ -193,7 +193,8 @@ def fuzzing_checker(project_url: str, res_payload: dict) -> None:
     """
     
     all_results = []
-    owner_name, repo_path = platform_manager.parse_project_url(project_url)
+    owner_name, repo_name = platform_manager.parse_project_url(project_url)
+    repo_path = os.path.join(os.getcwd(), repo_name)
     
     # 检测 ClusterFuzzLite
     cfl_result = check_clusterfuzz_lite(repo_path)

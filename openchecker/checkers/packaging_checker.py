@@ -1,4 +1,5 @@
 import re
+import os
 from typing import List, Dict, Tuple, Any
 from pathlib import Path
 from common import get_platform_type, list_workflow_files
@@ -174,7 +175,8 @@ def packaging_checker(project_url: str, res_payload: dict) -> None:
     """
     
     packaging_workflow_data = []
-    owner_name, repo_path = platform_manager.parse_project_url(project_url)
+    owner_name, repo_name = platform_manager.parse_project_url(project_url)
+    repo_path = os.path.join(os.getcwd(), repo_name)
     platform_type = get_platform_type(project_url)
     workflow_files = list_workflow_files(repo_path, platform_type)
     for file_path in workflow_files:

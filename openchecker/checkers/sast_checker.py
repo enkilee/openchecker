@@ -1,4 +1,5 @@
 import re
+import os
 import yaml
 from typing import List, Dict, Tuple, Any
 from pathlib import Path
@@ -114,7 +115,8 @@ def sast_checker(project_url: str, res_payload: dict) -> None:
     SAST 工具检查 
     指标详情介绍 https://github.com/ossf/scorecard/blob/main/docs/checks.md#sast
     """
-    owner_name, repo_path = platform_manager.parse_project_url(project_url)
+    owner_name, repo_name = platform_manager.parse_project_url(project_url)
+    repo_path = os.path.join(os.getcwd(), repo_name)
     platform_type = get_platform_type(project_url)
     
     workflows = detect_workflows(repo_path, platform_type)

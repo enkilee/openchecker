@@ -1,4 +1,5 @@
 import re
+import os
 import yaml
 from pathlib import Path
 from typing import Any, List, Dict
@@ -194,7 +195,8 @@ def dangerous_workflow_checker(project_url: str, res_payload: dict) -> None:
     检查仓库中的危险工作流,
     指标详情介绍 https://github.com/ossf/scorecard/blob/main/docs/checks.md#dangerous-workflow
     """
-    owner_name, repo_path = platform_manager.parse_project_url(project_url)
+    owner_name, repo_name = platform_manager.parse_project_url(project_url)
+    repo_path = os.path.join(os.getcwd(), repo_name)
     platform_type = get_platform_type(project_url)
     workflow_files = list_workflow_files(repo_path, platform_type)
     workflows_file_detail = []
