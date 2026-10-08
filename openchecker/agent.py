@@ -592,8 +592,8 @@ def parse_oat_txt_to_json(txt: str) -> Dict[str, Any]:
                         "project": match.group(4).strip(),
                         "file": match.group(5).strip(),
                     }
-                if current_section and "details" in result[current_section]:
-                    result[current_section]["details"].append(entry)
+                    if current_section and "details" in result[current_section]:
+                        result[current_section]["details"].append(entry)
         return result
     except Exception as e:
         logger.error(f"parse_oat_txt error: {e}")
