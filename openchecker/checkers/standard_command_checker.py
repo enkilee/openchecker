@@ -179,7 +179,7 @@ def get_package_info(project_url: str) -> Tuple[Dict, str]:
                 "down_count": down_count, 
                 "day_enter": day_enter
             }, None
-        elif response.status_code == 404:
+        elif response_down.status_code == 404:
             logger.error("Failed to get down_count for package: {} \n Error: Not found".format(package_name))
             return {"description": False, "home_url": False, "dependent_count": False, "down_count": False, "day_enter": False}, "Not found"
     else:
